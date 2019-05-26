@@ -49,6 +49,7 @@ body
     background: none
     padding: 15px
     margin: 0
+    transition: transform 0.2s
     div
         width: 30px
         height: 3px
@@ -63,7 +64,8 @@ body
             top: 0
             left: 0
             transform: rotate(90deg)
-
+.remove
+    transform: rotate(225deg)
 //#######################################################################
 
 .header
@@ -212,8 +214,12 @@ body
             .active
                 opacity: 1
                 font-weight: 300
+    form
+        display: flex
+        align-items: center
+        justify-content: space-between
+        margin: 0 0 60px
     input
-        margin: 0 0 60px 0
         max-width: 200px
         height: 30px
         border-radius: 5px
@@ -222,6 +228,16 @@ body
         text-align: center
         &::placeholder
             font-family: 'Roboto', sans-serif
+    button
+        font-family: 'Roboto', sans-serif
+        color: white
+        font-weight: 100
+        background: none
+        border: 2px solid white
+        height: 44px
+        width: 44px
+        border-radius: 5px
+        
 
 .hidden
     transform: translateX(-100%)
