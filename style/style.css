@@ -1,0 +1,295 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:100,300,400&display=swap");
+body {
+  font-family: "Roboto", sans-serif;
+  color: white;
+  background: linear-gradient(#1A2760, #9561A1) fixed;
+  margin: 0;
+  padding: 0;
+}
+
+.hamburger {
+  border: none;
+  background: none;
+  padding: 15px;
+  position: fixed;
+  top: 26px;
+  left: 0px;
+  z-index: 9999;
+}
+.hamburger div {
+  width: 30px;
+  height: 3px;
+  background: #ffffff;
+  position: relative;
+  transition: width 0.3s;
+}
+.hamburger div::after {
+  transition: transform 0.3s ease-in;
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background: #ffffff;
+  top: 11px;
+  left: 0;
+}
+.hamburger div::before {
+  transition: transform 0.3s ease-in;
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background: #ffffff;
+  top: -11px;
+  left: 0;
+}
+
+.add-to-fav {
+  position: absolute;
+  top: 26px;
+  right: 0;
+  border: none;
+  background: none;
+  padding: 15px;
+  margin: 0;
+}
+.add-to-fav div {
+  width: 30px;
+  height: 3px;
+  background: #ffffff;
+  position: relative;
+}
+.add-to-fav div::after {
+  content: "";
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background: #ffffff;
+  top: 0;
+  left: 0;
+  transform: rotate(90deg);
+}
+
+.header {
+  width: 100%;
+  top: 0;
+}
+.header h2 {
+  max-width: 80%;
+  font-size: 45px;
+  font-weight: 300;
+  text-align: center;
+  margin: 0 auto;
+}
+.header h4 {
+  font-size: 16px;
+  font-weight: 300;
+  text-align: center;
+  margin: 0;
+}
+.header .city-date {
+  margin-top: 9px;
+}
+
+.weatherNow {
+  margin: 150px auto 0;
+  max-width: 400px;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.weatherNow .left .weather-visuality {
+  display: flex;
+  align-items: center;
+}
+.weatherNow .left .weather-visuality p {
+  font-size: 46px;
+  font-weight: 300;
+  margin: 0 0 0 12px;
+}
+.weatherNow .left .weather-visuality img {
+  transform: scale(1);
+}
+.weatherNow .left h1 {
+  font-size: 150px;
+  font-weight: 100;
+  margin: -15px 0 0;
+}
+.weatherNow .right {
+  position: absolute;
+  text-align: center;
+  right: 40px;
+  top: 120px;
+}
+.weatherNow .right p {
+  font-size: 28px;
+  font-weight: 300;
+  margin: 0;
+}
+.weatherNow .right hr {
+  opacity: 0.6;
+}
+
+.temp-by-hour {
+  margin: 40px 0 50px 0;
+}
+.temp-by-hour ul {
+  list-style: none;
+  display: flex;
+  margin: 0 auto 0;
+  padding: 0;
+  justify-content: space-between;
+  max-width: 400px;
+  width: 80%;
+}
+.temp-by-hour ul li {
+  text-align: center;
+}
+.temp-by-hour ul li p {
+  font-size: 18px;
+  margin: 0;
+  text-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px;
+}
+.temp-by-hour ul li p:first-child {
+  font-size: 24px;
+  margin-bottom: 14px;
+}
+
+.next-days {
+  margin: 0 auto 0;
+  max-width: 420px;
+  width: 95%;
+  text-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px;
+}
+.next-days .title {
+  display: flex;
+  align-items: center;
+}
+.next-days .title h3 {
+  font-size: 18px;
+  font-weight: 400;
+  margin: 0 8px 0 0;
+  white-space: nowrap;
+}
+.next-days .title .line {
+  max-width: 370px;
+  width: 90%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.next-days ul {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.next-days ul li {
+  margin: 0 auto 20PX;
+  text-align: center;
+  justify-content: center;
+}
+.next-days ul li .dayname {
+  font-size: 18px;
+  margin: 0 0 5px;
+}
+.next-days ul li .temp {
+  font-size: 27px;
+  font-weight: 300;
+  margin: 0;
+}
+.next-days ul li .highest {
+  margin: 0 0 -8px;
+}
+.next-days ul li .lowest {
+  opacity: 0.5;
+  margin: -8px 0 0;
+}
+.next-days ul li hr {
+  opacity: 0.5;
+  max-width: 50px;
+}
+.next-days ul li img {
+  height: 44px;
+}
+
+.city-list {
+  background: #3D3D3D;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s ease-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+.city-list ul {
+  list-style: none;
+  text-align: center;
+  padding: 0 10px 0;
+  margin: 0;
+  max-height: 350px;
+  overflow-y: scroll;
+}
+.city-list ul li {
+  margin: 0;
+}
+.city-list ul li p {
+  font-size: 35px;
+  font-weight: 200;
+  opacity: 0.6;
+  margin: 0 0 16px;
+}
+.city-list ul li .active {
+  opacity: 1;
+  font-weight: 300;
+}
+.city-list input {
+  margin: 0 0 60px 0;
+  max-width: 200px;
+  height: 30px;
+  border-radius: 5px;
+  padding: 3px;
+  border: 4px solid white;
+  text-align: center;
+}
+.city-list input::placeholder {
+  font-family: "Roboto", sans-serif;
+}
+
+.hidden {
+  transform: translateX(-100%);
+}
+
+.opened div {
+  width: 0px;
+  height: 3px;
+  position: relative;
+}
+.opened div::after {
+  content: "";
+  transform: rotate(45deg) translateY(-15px);
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background: #ffffff;
+  top: 11px;
+  left: 0;
+}
+.opened div::before {
+  content: "";
+  transform: rotate(-45deg) translateY(15px);
+  position: absolute;
+  width: 30px;
+  height: 3px;
+  background: #ffffff;
+  top: -11px;
+  left: 0;
+}
+
+/*# sourceMappingURL=style.css.map */
