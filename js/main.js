@@ -40,12 +40,17 @@ window.onload = function(){
         fetch(`https://api.openweathermap.org/data/2.5/forecast?appid=${key1}&${q}&units=metric`)
         .then(response => response.json())
         .then(json => {
+            console.log(json)
             document.querySelector('.city').innerHTML = json.city.name;
             checkIfOnList();
             let count = 0;
             document.querySelectorAll('.temp-by-hour>ul>li').forEach((e)=>{
                 e.children[0].innerHTML = `${Math.round(json.list[count].main.temp)}°`;
-                e.children[1].innerHTML = `${json.list[count+1].dt_txt[11]}${json.list[count+1].dt_txt[12]}:00`;
+                let hour = json.list[count].dt_txt[11]+json.list[count].dt_txt[12];
+                hour = eval(`${hour}`)+json.city.timezone/3600
+                if(hour<0) hour+=24;
+                if(hour>24) hour-=24;
+                e.children[1].innerHTML = `${hour}:00`;
                 count++;
             });
         });
@@ -110,7 +115,6 @@ window.onload = function(){
                 }
                 e.target.classList.add('active');
                 getWeather('name' ,document.querySelector('.active').innerHTML);
-                console.log(document.querySelector('.active').innerHTML)
                 checkIfOnList;
                 setTimeout(function(){
                     document.querySelector('.city-list').classList.toggle('hidden');

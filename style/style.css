@@ -125,7 +125,7 @@ body {
   position: absolute;
   text-align: center;
   right: 40px;
-  top: 120px;
+  bottom: 30px;
 }
 .weatherNow .right p {
   font-size: 28px;
