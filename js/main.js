@@ -27,7 +27,7 @@ function continueExecution(){
 }
 
 function getWeatherByCords(lat, lon){
-    fetch(`http://api.apixu.com/v1/forecast.json?key=${key}&q=${lat},${lon}&days=7`)
+    fetch(`https://api.apixu.com/v1/forecast.json?key=${key}&q=${lat},${lon}&days=7`)
         .then(response => response.json())
         .then(json => {
             document.querySelector('.date').innerHTML = `${json.location.localtime}`;
@@ -47,7 +47,7 @@ function getWeatherByCords(lat, lon){
                 count++;
             });
         });
-        fetch(`http://api.openweathermap.org/data/2.5/forecast?appid=${key1}&lat=${lat}&lon=${lon}&units=metric`)
+        fetch(`https://api.openweathermap.org/data/2.5/forecast?appid=${key1}&lat=${lat}&lon=${lon}&units=metric`)
         .then(response => response.json())
         .then(json => {
             document.querySelector('.city').innerHTML = json.city.name;
