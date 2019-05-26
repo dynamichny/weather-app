@@ -75,6 +75,7 @@ window.onload = function(){
         for(e in locations){
             if(locations[e].text == document.querySelector('.city').innerHTML){
                 document.querySelector('.add-to-fav').classList.add('remove');
+                break;
             } else{
                 document.querySelector('.add-to-fav').classList.remove('remove');
             }
@@ -109,22 +110,23 @@ window.onload = function(){
                 }
                 e.target.classList.add('active');
                 getWeather('name' ,document.querySelector('.active').innerHTML);
+                console.log(document.querySelector('.active').innerHTML)
+                checkIfOnList;
                 setTimeout(function(){
                     document.querySelector('.city-list').classList.toggle('hidden');
                     document.querySelector('.hamburger').classList.toggle('opened');
                 }, 100);
-                checkIfOnList();
             });
         });
     }
 
-    //searching city by name
+    //searching city by name |
     document.querySelector('.city-list-form').addEventListener('submit', (e)=>{
         e.preventDefault();
         document.querySelector('.city-list').classList.toggle('hidden');
         document.querySelector('.hamburger').classList.toggle('opened');
         getWeather('name' ,document.querySelector('.city-list-form>input').value);
-        checkIfOnList();
+        checkIfOnList;
     });
 
     //when + is clicked it check if it have remove class and add or remove city name from the list
