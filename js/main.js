@@ -34,13 +34,13 @@ window.onload = function(){
             q = `lat=${lat}&lon=${lon}`;
             q1 = `q=${lat},${lon}`;
         } if(method == 'name'){
+            lat = replaceSpecialSigns(lat);
             q = `q=${lat}`;
             q1 = `q=${lat}`;
         }
         fetch(`https://api.openweathermap.org/data/2.5/forecast?appid=${key1}&${q}&units=metric`)
         .then(response => response.json())
         .then(json => {
-            console.log(json)
             document.querySelector('.city').innerHTML = json.city.name;
             checkIfOnList();
             let count = 0;
@@ -53,6 +53,8 @@ window.onload = function(){
                 e.children[1].innerHTML = `${hour}:00`;
                 count++;
             });
+            document.querySelector('.lon').innerHTML = json.city.coord.lon;
+            document.querySelector('.lat').innerHTML = json.city.coord.lat;
         });
         fetch(`https://api.apixu.com/v1/forecast.json?key=${key}&${q1}&days=7`)
             .then(response => response.json())
@@ -114,7 +116,13 @@ window.onload = function(){
                     document.querySelector('.active').classList.remove('active');
                 }
                 e.target.classList.add('active');
-                getWeather('name' ,document.querySelector('.active').innerHTML);
+                let locationTarget;
+                for(e in locations){
+                    if(locations[e].text == document.querySelector('.active').innerHTML){
+                        locationTarget = locations[e]
+                        break;
+                    }}
+                getWeather('cords',locationTarget.lat, locationTarget.lon);
                 checkIfOnList;
                 setTimeout(function(){
                     document.querySelector('.city-list').classList.toggle('hidden');
@@ -139,7 +147,9 @@ window.onload = function(){
         let classlist = document.querySelector('.add-to-fav').classList
         if(classlist.contains('remove')){
             const item = {
-                text: document.querySelector('.city').innerHTML
+                text: document.querySelector('.city').innerHTML,
+                lon: document.querySelector('.lon').innerHTML,
+                lat: document.querySelector('.lat').innerHTML
             }
             locations.push(item);
         } else{
@@ -149,6 +159,17 @@ window.onload = function(){
         buildCityList();
     });
 
+    function replaceSpecialSigns(word){
+        let replaced = word.replace(/[ęĘ]/gi, 'e');
+        replaced = replaced.replace(/[óÓ]/gi, 'o');
+        replaced = replaced.replace(/[ąĄ]/gi, 'a');
+        replaced = replaced.replace(/[śŚ]/gi, 's');
+        replaced = replaced.replace(/[łŁ]/gi, 'l');
+        replaced = replaced.replace(/[żźŻŹ]/gi, 'z');
+        replaced = replaced.replace(/[ćĆ]/gi, 'c');
+        replaced = replaced.replace(/[ńŃ]/gi, 'n');
+        return replaced;
+    }
 
 
 }

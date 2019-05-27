@@ -125,7 +125,7 @@ body {
   position: absolute;
   text-align: center;
   right: 40px;
-  bottom: 30px;
+  bottom: 25px;
 }
 .weatherNow .right p {
   font-size: 28px;
@@ -310,6 +310,10 @@ body {
   background: #ffffff;
   top: -11px;
   left: 0;
+}
+
+.lon, .lat {
+  display: none;
 }
 
 /*# sourceMappingURL=style.css.map */
