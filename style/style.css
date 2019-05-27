@@ -44,6 +44,26 @@ body {
   left: 0;
 }
 
+.blackburger div {
+  background: black;
+}
+.blackburger div::after {
+  background: black;
+}
+.blackburger div::before {
+  background: black;
+}
+
+.whiteburger div {
+  background: white;
+}
+.whiteburger div::after {
+  background: white;
+}
+.whiteburger div::before {
+  background: white;
+}
+
 .add-to-fav {
   position: absolute;
   top: 26px;
@@ -69,6 +89,20 @@ body {
   top: 0;
   left: 0;
   transform: rotate(90deg);
+}
+
+.blackplus div {
+  background: black;
+}
+.blackplus div::after {
+  background: black;
+}
+
+.whiteplus div {
+  background: white;
+}
+.whiteplus div::after {
+  background: white;
 }
 
 .remove {
@@ -181,7 +215,7 @@ body {
   max-width: 370px;
   width: 90%;
   height: 1px;
-  background: rgba(255, 255, 255, 0.5);
+  background: white;
 }
 .next-days ul {
   display: flex;
@@ -314,6 +348,10 @@ body {
 
 .lon, .lat {
   display: none;
+}
+
+.blackline {
+  background: black !important;
 }
 
 /*# sourceMappingURL=style.css.map */

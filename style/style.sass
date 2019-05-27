@@ -16,7 +16,6 @@ body
     top: 26px
     left: 0px
     z-index: 9999
-
     div
         width: 30px
         height: 3px
@@ -41,6 +40,25 @@ body
             background: #ffffff
             top: -11px
             left: 0
+.blackburger
+    div
+        background: black
+        &::after
+            background: black
+        &::before
+            background: black
+.whiteburger
+    div
+        background: white
+        &::after
+            background: white
+        &::before
+            background: white
+
+
+
+
+
 .add-to-fav
     position: absolute
     top: 26px
@@ -64,6 +82,18 @@ body
             top: 0
             left: 0
             transform: rotate(90deg)
+.blackplus
+    div
+        background: black
+        &::after   
+            background: black
+.whiteplus
+    div
+        background: white
+        &::after   
+            background: white
+
+
 .remove
     transform: rotate(225deg)
 //#######################################################################
@@ -155,7 +185,7 @@ body
             max-width: 370px
             width: 90%
             height: 1px
-            background: rgba(255,255,255,0.5)
+            background: rgb(255,255,255)
     ul
         display: flex
         justify-content: space-between
@@ -268,3 +298,6 @@ body
 
 .lon, .lat
     display: none
+
+.blackline
+    background: black !important
