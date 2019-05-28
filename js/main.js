@@ -1,6 +1,5 @@
 const key = '2f137e570a9d4c6188e211028192505';
 const key1 = '2c9ecf23c2cc167ce8dda16db67700ba';
-const placesKey = 'AIzaSyD7V_VZeM_ef7Ku3P67L4rctjAIJR9qilo';
 const locations = JSON.parse(localStorage.getItem('locations')) || [];
 var xd = 0;
 
@@ -67,6 +66,8 @@ window.onload = function(){
                 e.children[1].innerHTML = `${hour}:00`;
                 count++;
             });
+        }).catch(function(error) {
+            alert(`Counldn't find location.`);
         });
         fetch(`https://api.apixu.com/v1/forecast.json?key=${key}&${q1}&days=7`)
         .then(response => response.json())
@@ -88,6 +89,8 @@ window.onload = function(){
                     e.children[4].innerHTML = `${Math.round(json.forecast.forecastday[count].day.mintemp_c)}°`;
                     count++;
                 });
+            }).catch(function(error) {
+                alert(`Counldn't find location.`);
             });
     }
 
@@ -113,11 +116,18 @@ window.onload = function(){
         locations.forEach((city)=>{
             let newCityLi = document.createElement('li');
             let newCityP = document.createElement('p');
+            let thisDelete = document.createElement('button')
+            let thisInside = document.createElement('div');
+            thisDelete.appendChild(thisInside);
+            thisDelete.dataset.key = city.text;
+            thisDelete.classList.add('thisDelete')
             newCityP.innerHTML = city.text;
             newCityLi.appendChild(newCityP);
+            newCityLi.appendChild(thisDelete);
             document.querySelector('.city-names').appendChild(newCityLi);
         });
         listItemOnClick();
+        deleteListener();
     }
 
 
@@ -145,6 +155,8 @@ window.onload = function(){
         });
     }
 
+    
+
     //searching city by name |
     document.querySelector('.city-list-form').addEventListener('submit', (e)=>{
         e.preventDefault();
@@ -154,13 +166,18 @@ window.onload = function(){
         let inputValue = document.querySelector('.city-list-form>input').value;
         if(regex.test(inputValue)){
             inputValue = inputValue.split(/,/);
+            xd = 0;
             getWeather('name', inputValue[0], inputValue[1]);
             checkIfOnList;
             return;
         }
+        xd = 0;
         getWeather('name', inputValue);
         checkIfOnList;
     });
+
+
+
 
     //when + is clicked it check if it have remove class and add or remove city name from the list
     document.querySelector('.add-to-fav').addEventListener('click', (e)=>{
@@ -179,6 +196,24 @@ window.onload = function(){
         localStorage.setItem('locations', JSON.stringify(locations));
         buildCityList();
     });
+
+
+    function deleteListener(){
+        document.querySelectorAll('.thisDelete').forEach((buttons)=>{
+            buttons.addEventListener('click', (event)=>{
+                locations.splice(locations.indexOf(document.querySelector(`button[data-key="${event.target.dataset.key}"]`).dataset.key), 1);
+                localStorage.setItem('locations', JSON.stringify(locations));
+                buildCityList();
+                checkIfOnList();           
+                });
+            });
+    }
+
+
+
+
+
+
 
     function replaceSpecialSigns(word){
         let replaced = word.replace(/[ęĘ]/gi, 'e');
