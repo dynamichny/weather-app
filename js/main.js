@@ -1,7 +1,8 @@
 const key = '2f137e570a9d4c6188e211028192505';
 const key1 = '2c9ecf23c2cc167ce8dda16db67700ba';
+const placesKey = 'AIzaSyD7V_VZeM_ef7Ku3P67L4rctjAIJR9qilo';
 const locations = JSON.parse(localStorage.getItem('locations')) || [];
-
+var xd = 0;
 
 window.onload = function(){
 
@@ -37,12 +38,25 @@ window.onload = function(){
             lat = replaceSpecialSigns(lat);
             q = `q=${lat}`;
             q1 = `q=${lat}`;
+            if(lon){
+                q = `q=${lat},${lon}`;
+                q1 = `q=${lat},${lon}`;
+            }
         }
+        let thisLon, thisLat;
         fetch(`https://api.openweathermap.org/data/2.5/forecast?appid=${key1}&${q}&units=metric`)
         .then(response => response.json())
         .then(json => {
+            if(xd == 0){
+                thisLat = json.city.coord.lat;
+                thisLon = json.city.coord.lon;
+                xd++;
+                getWeather('cords', thisLat, thisLon);
+            }
             document.querySelector('.city').innerHTML = json.city.name;
             checkIfOnList();
+            document.querySelector('.lon').innerHTML = json.city.coord.lon;
+            document.querySelector('.lat').innerHTML = json.city.coord.lat;
             let count = 0;
             document.querySelectorAll('.temp-by-hour>ul>li').forEach((e)=>{
                 e.children[0].innerHTML = `${Math.round(json.list[count].main.temp)}°`;
@@ -53,12 +67,10 @@ window.onload = function(){
                 e.children[1].innerHTML = `${hour}:00`;
                 count++;
             });
-            document.querySelector('.lon').innerHTML = json.city.coord.lon;
-            document.querySelector('.lat').innerHTML = json.city.coord.lat;
         });
         fetch(`https://api.apixu.com/v1/forecast.json?key=${key}&${q1}&days=7`)
-            .then(response => response.json())
-            .then(json => {
+        .then(response => response.json())
+        .then(json => {
                 document.querySelector('.date').innerHTML = `${json.location.localtime}`;
                 document.querySelector('.weather-visuality>p').innerHTML = json.current.condition.text;
                 document.querySelector('.weather-visuality>img').src = json.current.condition.icon;
@@ -138,7 +150,15 @@ window.onload = function(){
         e.preventDefault();
         document.querySelector('.city-list').classList.toggle('hidden');
         document.querySelector('.hamburger').classList.toggle('opened');
-        getWeather('name' ,document.querySelector('.city-list-form>input').value);
+        let regex = /,/g;
+        let inputValue = document.querySelector('.city-list-form>input').value;
+        if(regex.test(inputValue)){
+            inputValue = inputValue.split(/,/);
+            getWeather('name', inputValue[0], inputValue[1]);
+            checkIfOnList;
+            return;
+        }
+        getWeather('name', inputValue);
         checkIfOnList;
     });
 
@@ -198,7 +218,6 @@ window.onload = function(){
         let regex = /night/gi;
         if(regex.test(src)){
             //thunders at night
-            console.log('o')
             regex = /(200)|(386)|(389)|(392)|(395)/gi;
             if(regex.test(src)){
                 document.querySelector('body').style.background = 'linear-gradient(-0deg, #fbff31b3 -200%, #1a2530 50%,#11171d 100%) fixed'
