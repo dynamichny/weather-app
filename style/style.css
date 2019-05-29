@@ -294,9 +294,6 @@ body {
   font-weight: 300;
 }
 .city-list ul li .thisDelete {
-  border: none;
-}
-.city-list ul li .thisDelete div {
   margin: 0 0 0 10px;
   width: 20px;
   height: 2px;
@@ -305,7 +302,7 @@ body {
   opacity: 0.2;
   transform: rotate(45deg);
 }
-.city-list ul li .thisDelete div::after {
+.city-list ul li .thisDelete::after {
   content: "";
   background: #ffffff;
   width: 20px;

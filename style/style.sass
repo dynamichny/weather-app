@@ -250,24 +250,22 @@ body
                 opacity: 1
                 font-weight: 300
             .thisDelete
-                border: none
-                div
-                    margin: 0 0 00 10px
+                margin: 0 0 00 10px
+                width: 20px
+                height: 2px
+                background: #ffffff
+                position: relative
+                opacity: 0.2
+                transform: rotate(45deg)
+                &::after
+                    content: ''
+                    background: #ffffff
                     width: 20px
                     height: 2px
-                    background: #ffffff
-                    position: relative
-                    opacity: 0.2
-                    transform: rotate(45deg)
-                    &::after
-                        content: ''
-                        background: #ffffff
-                        width: 20px
-                        height: 2px
-                        position: absolute 
-                        top: 0
-                        left: 0
-                        transform: rotate(90deg)
+                    position: absolute 
+                    top: 0
+                    left: 0
+                    transform: rotate(90deg)
 
     form
         display: flex

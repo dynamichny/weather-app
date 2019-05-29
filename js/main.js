@@ -116,9 +116,7 @@ window.onload = function(){
         locations.forEach((city)=>{
             let newCityLi = document.createElement('li');
             let newCityP = document.createElement('p');
-            let thisDelete = document.createElement('button')
-            let thisInside = document.createElement('div');
-            thisDelete.appendChild(thisInside);
+            let thisDelete = document.createElement('div')
             thisDelete.dataset.key = city.text;
             thisDelete.classList.add('thisDelete')
             newCityP.innerHTML = city.text;
@@ -198,10 +196,15 @@ window.onload = function(){
     });
 
 
+
     function deleteListener(){
         document.querySelectorAll('.thisDelete').forEach((buttons)=>{
             buttons.addEventListener('click', (event)=>{
-                locations.splice(locations.indexOf(document.querySelector(`button[data-key="${event.target.dataset.key}"]`).dataset.key), 1);
+                for(each in locations){
+                    if(locations[each].text == document.querySelector(`div[data-key="${event.target.dataset.key}"]`).dataset.key){
+                        locations.splice(locations.indexOf(locations[each]),1)
+                    }
+                }
                 localStorage.setItem('locations', JSON.stringify(locations));
                 buildCityList();
                 checkIfOnList();           
